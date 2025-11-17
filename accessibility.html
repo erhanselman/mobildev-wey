@@ -1,0 +1,556 @@
+<html>
+
+<head>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #eef1ff;
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --border: #e0e0e0;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            --transition: all 0.2s ease;
+
+            /* Erişilebilirlik Değişkenleri */
+            --font-size: 1rem;
+            --line-height: 1.5;
+            --letter-spacing: 0em;
+            --word-spacing: 0em;
+            --focus-outline: 2px solid var(--primary);
+            --link-underline: underline;
+            --dyslexic-font: 'Inter', sans-serif;
+            --animation-state: running;
+            --image-opacity: 1;
+            --reading-guide: none;
+            --reading-guide-pos: 50%;
+            --reading-mask-height: 80px;
+            --highlight-color: #4361ee33;
+            --brightness: 100%;
+            --monochrome: 0%;
+            --saturate: 100%;
+            --text-align: left;
+            --contrast: 1;
+            --invert: 0;
+        }
+
+        /* Kontrast Modları */
+        .contrast-high {
+            --bg: #000;
+            --text: #fff;
+            --primary: #ffff00;
+            --border: #ffff00;
+            --focus-outline: 2px solid #ffff00;
+        }
+
+        .dark-mode {
+            --bg: #1a1a1a;
+            --text: #fff;
+            --primary: #4cc9f0;
+            --border: #444;
+        }
+
+        .contrast-light {
+            --bg: #f8f9fa;
+            --text: #000;
+            --primary: #005a9c;
+            --border: #ced4da;
+            --focus-outline: 2px solid #005a9c;
+        }
+
+        /* Genel */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 2rem;
+            font-family: var(--dyslexic-font);
+            font-size: var(--font-size);
+            line-height: var(--line-height);
+            letter-spacing: var(--letter-spacing);
+            word-spacing: var(--word-spacing);
+            background: var(--bg);
+            color: var(--text);
+            transition: var(--transition);
+            filter: brightness(var(--brightness)) grayscale(var(--monochrome)) saturate(var(--saturate)) contrast(var(--contrast)) invert(var(--invert));
+            text-align: var(--text-align);
+        }
+
+        /* Büyük İmleç */
+        .apex-big-cursor-active {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M10 2L6 10L10 14L14 10L10 2Z" fill="%234361ee"/></svg>') 10 10, auto;
+        }
+
+        * {
+            animation-play-state: var(--animation-state);
+        }
+
+        img {
+            opacity: var(--image-opacity);
+            transition: opacity 0.3s;
+            max-width: 100%;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: var(--link-underline);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            transition: var(--transition);
+        }
+
+        /* Okuma Kılavuzu */
+        .apex-reading-guide {
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            top: var(--reading-guide-pos);
+            display: var(--reading-guide);
+            z-index: 9998;
+            pointer-events: none;
+            box-shadow: 0 0 8px var(--primary);
+            transform: translateY(-50%);
+        }
+
+        /* Okuma Maskesi (İKİ KATMANLI) */
+        .apex-reading-mask-top,
+        .apex-reading-mask-bottom {
+            position: fixed;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9997;
+            pointer-events: none;
+            display: none;
+            /* JS ile kontrol edilecek */
+        }
+
+        .apex-reading-mask-top {
+            top: 0;
+        }
+
+        .apex-reading-mask-bottom {
+            bottom: 0;
+        }
+
+        /* Vurgular */
+        .apex-highlight-links a {
+            background: var(--highlight-color);
+            padding: 0 2px;
+            border-radius: 3px;
+        }
+
+        .apex-highlight-headings h1,
+        .apex-highlight-headings h2,
+        .apex-highlight-headings h3,
+        .apex-highlight-headings h4,
+        .apex-highlight-headings h5,
+        .apex-highlight-headings h6 {
+            background: var(--highlight-color);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Demo İçerik Stilleri */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        th {
+            background: var(--primary-light);
+        }
+
+        ul,
+        ol {
+            padding-left: 2rem;
+        }
+
+        form fieldset {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        /* Menü */
+        .apex-accessibility-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 320px;
+            background: var(--bg);
+            box-shadow: var(--shadow);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            overflow-y: auto;
+            z-index: 10000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: none;
+            /* Başlangıçta hide */
+        }
+
+        .apex-accessibility-menu.open {
+            transform: translateX(0);
+            display: block;
+        }
+
+        .apex-menu-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .apex-menu-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .apex-section {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .apex-section-title {
+            font-weight: 600;
+            margin: 0 0 0.75rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .apex-control-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .apex-control-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--primary-light);
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+
+            min-height: 44px;
+        }
+
+        .apex-control-item:hover {
+            background: #dbeafe;
+        }
+
+        .apex-profile-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .apex-profile-card {
+            background: var(--primary-light);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 0.6rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.75rem;
+            font-weight: 500;
+
+            min-height: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .apex-profile-card.active {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .apex-toggle {
+            position: relative;
+            width: 40px;
+            height: 22px;
+        }
+
+        .apex-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .apex-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            border-radius: 22px;
+            transition: var(--transition);
+
+            background: #767676;
+        }
+
+        .apex-toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 2px;
+            bottom: 2px;
+            background: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        input:checked+.apex-toggle-slider {
+            background: var(--primary);
+        }
+
+        input:checked+.apex-toggle-slider:before {
+            transform: translateX(18px);
+        }
+
+        .apex-open-menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10001;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .apex-open-menu-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Seslendirme İkonu */
+        .apex-speech-toggle {
+            position: fixed;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
+
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 10002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .apex-speech-toggle:hover {
+            background: #3651d4;
+        }
+
+        .apex-speech-toggle.playing {
+            background: #dc2626;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .apex-accessibility-menu {
+                width: 100%;
+            }
+
+            .apex-control-grid,
+            .apex-profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>APEX Erişilebilirlik Menüsü v5.3</h1>
+            <p>Bu sayfa, erişilebilirlik özelliklerini test etmek için zenginleştirilmiş bir demo içeriğidir.
+                <strong aria-label="Alt + M kısayol kombinasyonu ile menünü açabilirsiniz.">Alt + M</strong> ile menüyü
+                açabilirsiniz.
+            </p>
+        </header>
+
+        <section>
+            <h2>Bölüm 1: Metin ve Bağlantılar</h2>
+            <p>Bu bir paragraf örneğidir. Metin seçimi yapıldığında <a href="#">seslendirme özelliği</a> kullanılabilir.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.</p>
+            <blockquote>
+                "Erişilebilirlik, engelli olmayanlar için de bir kolaylık sağlar. Herkes için daha iyi bir deneyim
+                demektir."
+            </blockquote>
+            <h3>Alt Başlık Örneği</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+        </section>
+
+        <section>
+            <h2>Bölüm 2: Listeler ve Görseller</h2>
+            <img src="https://www.mobildev.com/assets/images/logo/logo-07.png"
+                alt="Bu bir örnek görseldir ve ayarlardan gizlenebilir.">
+            <h3>Sıralı Liste</h3>
+            <ol>
+                <li>İlk madde</li>
+                <li>İkinci madde</li>
+                <li>Üçüncü madde</li>
+            </ol>
+            <h3>Sırasız Liste</h3>
+            <ul>
+                <li>Önemli bir not</li>
+                <li>Başka bir bilgi</li>
+                <li>Ekstra detay</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Bölüm 3: Tablolar</h2>
+            <table>
+                <caption>Örnek Kullanıcı Tablosu</caption>
+                <thead>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>E-posta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ahmet</td>
+                        <td>Yılmaz</td>
+                        <td>ahmet@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Ayşe</td>
+                        <td>Kaya</td>
+                        <td>ayse@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Bölüm 4: Formlar</h2>
+            <form>
+                <fieldset>
+                    <legend>İletişim Formu</legend>
+                    <label for="name">Adınız:</label>
+                    <input type="text" id="name" name="name" placeholder="Adınızı girin" autocomplete="name"
+                        aria-required="true">
+
+                    <label for="email">E-posta:</label>
+                    <input type="email" id="email" name="email" placeholder="ornek@domain.com" autocomplete="email"
+                        aria-required="true">
+
+                    <label for="subject">Konu:</label>
+                    <select id="subject" name="subject">
+                        <option>Genel Soru</option>
+                        <option>Teknik Destek</option>
+                        <option>Öneri</option>
+                    </select>
+
+                    <label for="message">Mesajınız:</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Mesajınızı buraya yazın..."></textarea>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+
+    <script src="apex-accessibility-sdk.js"></script>
+    <script>
+        ApexAccessibilitySDK.init();
+    </script>
+</body>
+
+</html>
