@@ -24,7 +24,7 @@
                 profileDyslexia: 'Disleksi',
                 profileElderly: 'Yaşlılık',
                 // Kontrol Etiketleri
-                textSize: 'Boyut',
+                textSize: 'Metin Boyutu',
                 lineHeight: 'Satır Aralık',
                 letterSpacing: 'Harf Aralık',
                 textAlign: 'Hizalama',
@@ -812,7 +812,10 @@ body.${p}-font-bionic span.bionic-word {
                             <div class="${p}-control-item" id="${p}-font-size-btn">
                             <div>
                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"><path d="M11.25 17C11.25 17.4142 11.5858 17.75 12 17.75C12.4142 17.75 12.75 17.4142 12.75 17H11.25ZM15.25 9.75C15.25 10.1642 15.5858 10.5 16 10.5C16.4142 10.5 16.75 10.1642 16.75 9.75H15.25ZM7.25 9.75C7.25 10.1642 7.58579 10.5 8 10.5C8.41421 10.5 8.75 10.1642 8.75 9.75H7.25ZM15.7071 7.32544L16.2646 6.82371V6.82371L15.7071 7.32544ZM9.5 16.25C9.08579 16.25 8.75 16.5858 8.75 17C8.75 17.4142 9.08579 17.75 9.5 17.75V16.25ZM15 17.75C15.4142 17.75 15.75 17.4142 15.75 17C15.75 16.5858 15.4142 16.25 15 16.25V17.75ZM10 7.75H12V6.25H10V7.75ZM12 7.75H14V6.25H12V7.75ZM12.75 17V7H11.25V17H12.75ZM15.25 9.22222V9.75H16.75V9.22222H15.25ZM7.25 9.22222V9.75H8.75V9.22222H7.25ZM14 7.75C14.4949 7.75 14.7824 7.75196 14.9865 7.78245C15.0783 7.79617 15.121 7.8118 15.1376 7.8194C15.148 7.82415 15.1477 7.82503 15.1496 7.82716L16.2646 6.82371C15.96 6.4853 15.579 6.35432 15.2081 6.29891C14.8676 6.24804 14.4479 6.25 14 6.25V7.75ZM16.75 9.22222C16.75 8.71757 16.7513 8.27109 16.708 7.91294C16.6629 7.54061 16.559 7.15082 16.2646 6.82371L15.1496 7.82716C15.1523 7.83015 15.1609 7.83939 15.1731 7.87221C15.1873 7.91048 15.2048 7.97725 15.2188 8.09313C15.2487 8.34011 15.25 8.67931 15.25 9.22222H16.75ZM10 6.25C9.55208 6.25 9.13244 6.24804 8.79192 6.29891C8.42102 6.35432 8.04 6.4853 7.73542 6.82371L8.85036 7.82716C8.85228 7.82503 8.85204 7.82415 8.86242 7.8194C8.87904 7.8118 8.92168 7.79617 9.01354 7.78245C9.21765 7.75196 9.50511 7.75 10 7.75V6.25ZM8.75 9.22222C8.75 8.67931 8.75129 8.34011 8.78118 8.09313C8.7952 7.97725 8.81273 7.91048 8.8269 7.87221C8.83905 7.83939 8.84767 7.83015 8.85036 7.82716L7.73542 6.82371C7.44103 7.15082 7.3371 7.54061 7.29204 7.91294C7.24871 8.27109 7.25 8.71757 7.25 9.22222H8.75ZM9.5 17.75H15V16.25H9.5V17.75Z" fill="var(--apex-sdk-primary)"/><path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="var(--apex-sdk-primary)" stroke-width="1.5" stroke-linecap="round"/></svg>
-                            <span>${l.textSize}</span></div></div>
+                            <div>${l.textSize}</div>                            
+                            </div>
+                            <span></span>
+                            </div>
                             <div class="${p}-control-item" id="${p}-line-height-btn">
                             <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"><path d="M4 21H13M20 21H17" stroke="var(--apex-sdk-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 3H20" stroke="var(--apex-sdk-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5.5L15 8.5M12 5.5L9 8.5M12 5.5V18.5M12 18.5L15 15.5M12 18.5L9 15.5" stroke="var(--apex-sdk-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -977,7 +980,7 @@ body.${p}-font-bionic span.bionic-word {
                     <footer class="${p}-menu-footer">
                         <a href="mobildev.com">
                         <span>© Mobildev.com</span>
-                        <img src="https://www.mobildev.com/assets/images/logo/logo-03.png" alt="Mobildev">
+                        <img src="https://cloud.mobildev.com/logo-03.png" alt="Mobildev">
                         </a>
                     </footer>
                     </div>
@@ -1035,7 +1038,11 @@ body.${p}-font-bionic span.bionic-word {
                 { value: 'dark', label: 'Koyu Kontrast', apply: () => { body.classList.remove(`${p}-contrast-light`, `${p}-contrast-high`); body.classList.add(`${p}-dark-mode`); root.style.setProperty(`--${p}-contrast`, 1); root.style.setProperty(`--${p}-invert`, 0); } },
                 { value: 'high', label: 'Yüksek Kontrast', apply: () => { body.classList.remove(`${p}-contrast-light`, `${p}-dark-mode`); body.classList.add(`${p}-contrast-high`); root.style.setProperty(`--${p}-contrast`, 1.5); root.style.setProperty(`--${p}-invert`, 0); } }
             ];
-            const speech = { synth: window.speechSynthesis, utterance: null, isSpeaking: false };
+            const speech = {
+                synth: window.speechSynthesis,
+                utterance: null,
+                isSpeaking: false
+            };
             let isTracking = false;
             let timeout;
 
@@ -1089,7 +1096,7 @@ body.${p}-font-bionic span.bionic-word {
                 document.getElementById(`${p}-hide-images`).checked = settings.hideImages;
                 document.getElementById(`${p}-stop-animations`).checked = settings.stopAnimations;
 
-                const fsBtn = document.getElementById(`${p}-font-size-btn`); if (fsBtn) fsBtn.querySelector('span').textContent = [{ value: 1, label: l.textSize }, { value: 1.2, label: l.textSize }, { value: 1.4, label: l.textSize }, { value: 1.6, label: l.textSize }, { value: 1.8, label: l.textSize }].find(v => v.value === settings.fontSize).label;
+                const fsBtn = document.getElementById(`${p}-font-size-btn`); if (fsBtn) fsBtn.querySelector('span').textContent = [{ value: 1, label: "Normal" }, { value: 1.2, label: "Orta" }, { value: 1.4, label: "Büyük" }, { value: 1.6, label: "Büyük+" }, { value: 1.8, label: "Büyük++" }].find(v => v.value === settings.fontSize).label;
                 const lhBtn = document.getElementById(`${p}-line-height-btn`); if (lhBtn) lhBtn.querySelector('span').textContent = [{ value: 1.2, label: 'Sıkışık' }, { value: 1.5, label: 'Normal' }, { value: 1.8, label: 'Geniş' }, { value: 2.2, label: 'Geniş+' }].find(v => v.value === settings.lineHeight).label;
                 const lsBtn = document.getElementById(`${p}-letter-spacing-btn`); if (lsBtn) lsBtn.querySelector('span').textContent = [{ value: 0, label: 'Normal' }, { value: 0.05, label: 'Açık' }, { value: 0.1, label: 'Açık+' }, { value: 0.2, label: 'Açık++' }].find(v => v.value === settings.letterSpacing).label;
                 const taBtn = document.getElementById(`${p}-text-align-btn`); if (taBtn) taBtn.querySelector('span').textContent = [{ value: 'left', label: 'Sol' }, { value: 'center', label: 'Orta' }, { value: 'right', label: 'Sağ' }, { value: 'justify', label: 'Yasla' }].find(v => v.value === settings.textAlign).label;
@@ -1224,17 +1231,20 @@ body.${p}-font-bionic span.bionic-word {
                     speedBtn.querySelector('span').textContent = current.label;
 
                     // Aktif TTS varsa anında uygula
-                    if (speech.isSpeaking && speech.utterance) {
-                        const wasSpeaking = speech.isSpeaking;
-                        const text = speech.utterance.text;
-                        const pos = speech.synth.getVoices().length > 0 ? speech.synth.speaking ? speech.utterance.charIndex : 0 : 0;
+                    // if (speech.isSpeaking && speech.utterance) {
+                    //     const wasSpeaking = speech.isSpeaking;
+                    //     const text = speech.utterance.text;
+                    //     const pos = speech.synth.getVoices().length > 0 ? speech.synth.speaking ? speech.utterance.charIndex : 0 : 0;
 
-                        speech.synth.cancel();
-                        speech.utterance = new SpeechSynthesisUtterance(text);
-                        speech.utterance.lang = 'tr-TR';
-                        speech.utterance.rate = settings.ttsSpeed;
-                        speech.synth.speak(speech.utterance);
-                    }
+                    //     speech.synth.cancel();
+                    //     speech.utterance = new SpeechSynthesisUtterance(text);
+                    //     speech.utterance.lang = 'tr-TR';
+                    //     speech.utterance.rate = settings.ttsSpeed;
+                    //     speech.synth.speak(speech.utterance);
+
+
+                    // }
+                    speakToggleFunc();
                 }
 
 
@@ -1371,7 +1381,30 @@ body.${p}-font-bionic span.bionic-word {
                     applySettings();
                 };
             };
-            setupCycleButton(`${p}-font-size-btn`, [{ value: 1, label: l.textSize }, { value: 1.2, label: l.textSize + '+' }, { value: 1.4, label: l.textSize + '++' }, { value: 1.6, label: l.textSize + '+++' }, { value: 1.8, label: l.textSize + '++++' }], 'fontSize');
+
+            const setupTextButton = (btnId, values, settingKey) => {
+                var btn = document.getElementById(btnId);
+                if (btn) {
+                    let currentElement = values.find(a => { return a.value == settings[settingKey] });
+                    btn.querySelector('span').textContent = `${currentElement.label}`;
+
+
+                    btn.onclick = () => {
+                        
+                        var step = values.indexOf(currentElement);
+                        step = (step + 1) % values.length;
+                        console.log(step);
+                        currentElement = values[step];
+                        btn.querySelector('span').textContent = `${currentElement.label}`;
+                        settings[settingKey] = currentElement.value;
+                        applySettings();
+                    }
+                }
+            }
+
+            // setupCycleButton(`${p}-font-size-btn`, [{ value: 1, label: l.textSize }, { value: 1.2, label: l.textSize + '+' }, { value: 1.4, label: l.textSize + '++' }, { value: 1.6, label: l.textSize + '+++' }, { value: 1.8, label: l.textSize + '++++' }], 'fontSize');
+            setupTextButton(`${p}-font-size-btn`, [{ value: 1, label: "Normal" }, { value: 1.2, label: "Orta" }, { value: 1.4, label: "Büyük" }, { value: 1.6, label: "Büyük+" }, { value: 1.8, label: "Büyük++" }], 'fontSize');
+
             setupCycleButton(`${p}-line-height-btn`, [{ value: 1.2, label: 'Sıkışık' }, { value: 1.5, label: 'Normal' }, { value: 1.8, label: 'Geniş' }, { value: 2.2, label: 'Geniş+' }], 'lineHeight');
             setupCycleButton(`${p}-letter-spacing-btn`, [{ value: 0, label: 'Normal' }, { value: 0.05, label: 'Açık' }, { value: 0.1, label: 'Açık+' }, { value: 0.2, label: 'Açık++' }], 'letterSpacing');
             setupCycleButton(`${p}-text-align-btn`, [{ value: 'left', label: 'Sol' }, { value: 'center', label: 'Orta' }, { value: 'right', label: 'Sağ' }, { value: 'justify', label: 'Yasla' }], 'textAlign');
@@ -1626,16 +1659,47 @@ body.${p}-font-bionic span.bionic-word {
                 speech.utterance.onend = () => { speech.isSpeaking = false; speechToggle.classList.remove('playing'); speechToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2" stroke="var(--apex-sdk-primary)" stroke-width="1.5" stroke-linecap="round"/><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2" stroke="var(--apex-sdk-primary)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 3"/><path d="M15.4137 10.941C16.1954 11.4026 16.1954 12.5974 15.4137 13.059L10.6935 15.8458C9.93371 16.2944 9 15.7105 9 14.7868L9 9.21316C9 8.28947 9.93371 7.70561 10.6935 8.15419L15.4137 10.941Z" stroke="var(--apex-sdk-primary)" stroke-width="1.5"/></svg>'; speechToggle.style.display = 'none'; window.getSelection().removeAllRanges(); };
                 speech.synth.speak(speech.utterance);
             };
-            document.addEventListener('mouseup', (e) => { if (e.target.closest(`.${p}-speech-toggle`)) return; const selection = window.getSelection(); const selectedText = selection.toString().trim(); if (selectedText.length > 0 && settings.textToSpeech) { const rect = selection.getRangeAt(0).getBoundingClientRect(); speechToggle.style.left = `${rect.right + 10}px`; speechToggle.style.top = `${rect.top + window.scrollY}px`; speechToggle.style.display = 'flex'; speakText(selectedText); } else { speechToggle.style.display = 'none'; speech.synth.cancel(); } });
-            speechToggle.onclick = () => { if (speech.isSpeaking) speech.synth.cancel(); else { const selection = window.getSelection(); if (selection.toString().trim()) speakText(selection.toString().trim()); } };
+            document.addEventListener('mouseup', (e) => {
+                if (e.target.closest(`.${p}-speech-toggle`))
+                    return;
+
+                const selection = window.getSelection();
+                const selectedText = selection.toString().trim();
+                if (selectedText.length > 0 && settings.textToSpeech) {
+                    const rect = selection.getRangeAt(0).getBoundingClientRect();
+                    speechToggle.style.left = `${rect.right + 10}px`;
+                    speechToggle.style.top = `${rect.top + window.scrollY}px`;
+                    speechToggle.style.display = 'flex'; speakText(selectedText);
+                } else {
+                    speechToggle.style.display = 'none';
+                    speech.synth.cancel();
+                }
+            });
+            const speakToggleFunc = () => {
+                if (speech.isSpeaking)
+                    speech.synth.cancel();
+                else {
+                    const selection = window.getSelection();
+                    if (selection.toString().trim())
+                        speakText(selection.toString().trim());
+                }
+            }
+            speechToggle.onclick = () => {
+                speakToggleFunc()
+            };
 
             document.querySelectorAll(`.${p}-profile-card`).forEach(card => {
                 const activateProfile = () => {
                     const profile = card.dataset.profile;
                     if (settings.profile === profile) { settings = { ...defaultSettings }; settings.profile = null; } else { settings = { ...defaultSettings }; settings.profile = profile; }
                     const profiles = {
-                        epilepsy: () => { settings.stopAnimations = true; },
-                        lowvision: () => { settings.fontSize = 1.4; settings.contrastMode = 'high'; },
+                        epilepsy: () => {
+                            settings.stopAnimations = true;
+                        },
+                        lowvision: () => {
+                            settings.fontSize = 1.4;
+                            settings.contrastMode = 'high';
+                        },
                         adhd: () => { settings.readingGuide = true; settings.readingMask = true; },
                         blind: () => { settings.hideImages = true; settings.textToSpeech = true; settings.highlightLinks = true; settings.highlightHeadings = true; },
                         dyslexia: () => {
@@ -1645,6 +1709,7 @@ body.${p}-font-bionic span.bionic-word {
                         },
                         elderly: () => { settings.fontSize = 1.2; settings.lineHeight = 1.8; settings.contrastMode = 'high'; }
                     };
+
                     if (profiles[profile]) profiles[profile]();
                     applySettings();
                 };
