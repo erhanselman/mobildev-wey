@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>PageSpeed Dashboard</title>
+
+<style>
+body { font-family: Verdana, Geneva, Tahoma, sans-serif; padding: 20px; max-width: 1100px; }
+input, button { padding: 8px; font-size: 14px; }
+button { cursor: pointer; margin-right:5px }
+
+.progress { width:100%; height:18px; background:#eee; border-radius:10px; overflow:hidden }
+.progress-bar { height:100%; width:0%; background:#0cce6b; transition:width .4s }
+
+table { width:100%; border-collapse:collapse; margin-top:10px }
+th,td { border:1px solid #ddd; padding:8px; text-align:center }
+th { background:#f4f4f4 }
+
+.score { color:#fff; padding:5px 8px; border-radius:6px; font-weight:bold }
+.good{background:#0cce6b} .medium{background:#ffa400} .bad{background:#ff4e42}
+
+.flex{display:flex; gap:25px; align-items:center}
+.donut{
+  width:120px; height:120px; border-radius:50%;
+  background:conic-gradient(#0cce6b 0deg,#ddd 0deg);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; font-weight:bold
+}
+.audit{
+  background:#fff6f6; border-left:4px solid #ff4e42;
+  padding:10px; margin:8px 0
+}
+</style>
+</head>
+
+<body>
+
+<h2>PageSpeed Insights Dashboard</h2>
+<h5>@Hasan : Bizim site analizi uygulamamızı zenginleştirmek için google ın bu api sini kullanabilirmiyiz?</h6>
+ <h6></h6> 
+<h5>PageSpeed Insights, web sitelerinin hem mobil hem de masaüstü cihazlardaki performansını ölçen ve sayfa hızını artırmak için somut öneriler sunan Google'ın bir aracıdır.<br>
+   Kullanıcı deneyimini doğrudan etkileyen sayfa hızı  SEO başarısı için kritik bir rol oynar.<br>
+    Google PageSpeed Insights, sitelerin teknik performansını analiz etme ve kullanıcı memnuniyetini en üst düzeye çıkarma imkânı tanır.<br>
+     Yüksek performanslı bir web sitesi, ziyaretçilerin sitede daha uzun süre kalmasını ve dönüşüm oranlarının artmasını sağlar.</h6>
+
+     
+
+
+<input id="urlInput" placeholder="https://example.com" value="https://new.mobildev.com" style="width:340px">
+<button onclick="start()">Analiz Et</button>
+&nbsp;&nbsp;<a href="https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://news.mobildev.com&strategy=mobile&key=AIzaSyDRaX8y7srkpq-GmcM-umEddY4HBrrjjBo" target="_blank">Json Verisini Göster</a>
+&nbsp;&nbsp;<a href="https://pagespeed.web.dev/analysis/https-new-mobildev-com/cwv8o8k8xm?form_factor=mobile" target="_blank">PageSpeed Insights Test Et</a>
+<!--
+<button onclick="exportJSON()">JSON Export</button>
+<button onclick="exportCSV()">Excel (CSV)</button>
+-->
+
+<div id="loading" style="display:none;margin-top:10px">
+  <b>Analiz ediliyor...</b>
+  <div class="progress"><div id="bar" class="progress-bar"></div></div>
+</div>
+
+<div id="output"></div>
+
+
+<script type="module">
+
+const API_KEY = "AIzaSyDRaX8y7srkpq-GmcM-umEddY4HBrrjjBo";
+let exportData = [];
+
+/* ===== Progress animasyonu ===== */
+function animateProgress(){
+  let w=0;
+  bar.style.width="0%";
+  return setInterval(()=>{
+    w=(w+3)%100;
+    bar.style.width=w+"%";
+  },120);
+}
+
+
+const scoreClass = s => s>=90?'good':s>=50?'medium':'bad';
+
+const donut = (el, score) => {
+  const deg = score*3.6;
+  el.style.background =
+    `conic-gradient(#0cce6b ${deg}deg,#ddd ${deg}deg)`;
+  el.textContent = score;
+};
+
+/* ========= GLOBAL FUNCTIONS ========= */
+
+window.start = async function () {
+  const url = urlInput.value.trim();
+  if(!url) return alert("URL giriniz");
+
+  output.innerHTML="";
+  exportData=[];
+  loading.style.display="block";
+  bar.style.width="0%";
+
+    const timer=animateProgress();
+
+  const strategies=["mobile","desktop"];
+  let p=0;
+
+  for(const s of strategies){
+    bar.style.width=(p+=50)+"%";
+
+    const res = await fetch(
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed`+
+      `?url=${encodeURIComponent(url)}&strategy=${s}&key=${API_KEY}`
+    );
+    const data = await res.json();
+    const cat = data.lighthouseResult?.categories || {};
+
+    const scores = {
+      platform:s,
+      performance:Math.round((cat.performance?.score ?? 0)*100),
+      accessibility:Math.round((cat.accessibility?.score ?? 0)*100),
+      bestPractices:Math.round((cat["best-practices"]?.score ?? 0)*100),
+      seo:Math.round((cat.seo?.score ?? 0)*100)
+    };
+
+    exportData.push(scores);
+    renderResult(s, scores, data.lighthouseResult?.audits);
+  }
+
+    clearInterval(timer);
+  bar.style.width="100%";
+  setTimeout(()=>loading.style.display="none",500);
+};
+
+window.renderResult = function (platform, s, audits) {
+  const box=document.createElement("div");
+
+  box.innerHTML=`
+    <h3>${platform.toUpperCase()}</h3>
+    <div class="flex">
+      <div class="donut"></div>
+      <table>
+        <tr><th>Performance</th><th>Accessibility</th><th>Best</th><th>SEO</th></tr>
+        <tr>
+          <td><span class="score ${scoreClass(s.performance)}">${s.performance}</span></td>
+          <td><span class="score ${scoreClass(s.accessibility)}">${s.accessibility}</span></td>
+          <td><span class="score ${scoreClass(s.bestPractices)}">${s.bestPractices}</span></td>
+          <td><span class="score ${scoreClass(s.seo)}">${s.seo}</span></td>
+        </tr>
+      </table>
+    </div>
+    <h4>WCAG (Accessibility) Hataları</h4>
+  `;
+
+  output.appendChild(box);
+  donut(box.querySelector(".donut"), s.accessibility);
+
+  Object.values(audits || {})
+    .filter(a => a.score !== 1 && a.details?.type)
+    .slice(0,6)
+    .forEach(a=>{
+      const d=document.createElement("div");
+      d.className="audit";
+      d.innerHTML=`<b>${a.title}</b><br>${a.description}`;
+      box.appendChild(d);
+    });
+};
+
+/*
+window.exportJSON = function(){
+  download(new Blob([JSON.stringify(exportData,null,2)],
+    {type:"application/json"}),"pagespeed.json");
+};
+
+window.exportCSV = function(){
+  let csv="platform,performance,accessibility,bestPractices,seo\n";
+  exportData.forEach(r=>{
+    csv+=`${r.platform},${r.performance},${r.accessibility},${r.bestPractices},${r.seo}\n`;
+  });
+  download(new Blob([csv],{type:"text/csv"}),"pagespeed.csv");
+};
+
+function download(blob,name){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=name;
+  a.click();
+}
+*/
+
+
+</script>
+
+</body>
+</html>
